@@ -1,0 +1,21 @@
+import speech_recognition as sr
+def control_device(command):
+    if "on" in command.lower():
+        print(" Light turned ON")
+    elif "off" in command.lower():
+        print(" Light turned OFF")
+    else:
+        print("Unknown command")
+recognizer = sr.Recognizer()
+mic = sr.Microphone()
+print(" Say 'Turn on light' or 'Turn off light'...")
+while True:
+    with mic as source:
+        print("Listening...")
+        audio = recognizer.listen(source)
+    try:
+        command = recognizer.recognize_google(audio)
+        print("You said:", command)
+        control_device(command)
+    except:
+        print("Sorry, I didn't catch that.")
